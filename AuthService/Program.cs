@@ -72,12 +72,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+if (app.Environment.IsDevelopment())
 {
-    var services = scope.ServiceProvider;
-    var userRepo = services.GetRequiredService<IUserRepository>();
-    var hasher = services.GetRequiredService<IPasswordHasher>();
-    await DbInitializer.SeedAdminAsync(userRepo, hasher);
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var dbContext = services.GetRequiredService<AuthDbContext>();
+
+        await dbContext.Database.MigrateAsync();
+
+        var userRepo = services.GetRequiredService<IUserRepository>();
+        var hasher = services.GetRequiredService<IPasswordHasher>();
+        await DbInitializer.SeedAdminAsync(userRepo, hasher);
+    }
 }
 
 app.UseSwagger();

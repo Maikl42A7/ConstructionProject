@@ -1,5 +1,4 @@
-﻿using AuthService.Data;
-using AuthService.DTO;
+﻿using AuthService.DTO;
 using AuthService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +19,29 @@ namespace AuthService.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserDto userDto)
         {
-            await _userService.Register(userDto.userName, userDto.email, userDto.password);
-
-            return Ok("Пользователь зарегистрирован");
+            try
+            {
+                await _userService.Register(userDto.userName, userDto.email, userDto.password);
+                return Ok("Пользователь успешно зарегистрирован");
+            }
+            catch (Exception ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserDtoLogin userDtoLogin) 
+        public async Task<IActionResult> Login(UserDtoLogin userDtoLogin)
         {
-            var token = await _userService.Login(userDtoLogin.email, userDtoLogin.password);
-
-            return Ok(token);
+            try
+            {
+                var token = await _userService.Login(userDtoLogin.email, userDtoLogin.password);
+                return Ok(new { token }); 
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("all")]
@@ -45,12 +56,18 @@ namespace AuthService.Controllers
         [Authorize(Roles = "Администратор")]
         public async Task<IActionResult> SetUserRole(SetUserRoleDto dto)
         {
-            var result = await _userService.SetUserRoleAsync(dto.UserId, dto.Role);
-            if (!result)
-                return NotFound("Пользователь не найден");
+            try
+            {
+                var result = await _userService.SetUserRoleAsync(dto.UserId, dto.Role);
+                if (!result)
+                    return NotFound("Пользователь не найден");
 
-            return Ok("Роль обновлена");
+                return Ok("Роль успешно обновлена");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
-

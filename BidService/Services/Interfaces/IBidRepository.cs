@@ -9,5 +9,6 @@ namespace BidService.Services.Interfaces
         Task AddAsync(Bid bid);
         Task<bool> UpdateAsync(Bid bid);
         Task<bool> DeleteAsync(Guid id);
+        Task ClearAllAsync();
     }
 }

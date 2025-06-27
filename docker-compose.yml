@@ -1,0 +1,111 @@
+﻿services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   
+      - "15672:15672" 
+
+  auth-db:
+    image: postgres:15
+    container_name: auth-db
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123tryitout
+    ports:
+      - "5432:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d auth_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  bid-db:
+    image: postgres:15
+    container_name: bid-db
+    environment:
+      POSTGRES_DB: bid_db
+      POSTGRES_USER: postgres1
+      POSTGRES_PASSWORD: 123tryitout1
+    ports:
+      - "5433:5432" 
+    volumes:
+      - bid-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres1 -d bid_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  resource-db:
+    image: postgres:15
+    container_name: resource-db
+    environment:
+      POSTGRES_DB: resource_db
+      POSTGRES_USER: postgres2
+      POSTGRES_PASSWORD: 123tryitout2
+    ports:
+      - "5434:5432"
+    volumes:
+      - resource-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres2 -d resource_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  auth-service:
+    build:
+      context: . 
+      dockerfile: AuthService/Dockerfile 
+    container_name: auth-service
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=${AUTH_DB_CONNECTION_STRING}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+    depends_on:
+      auth-db:
+        condition: service_healthy
+
+  bid-service:
+    build:
+      context: . 
+      dockerfile: BidService/Dockerfile 
+    container_name: bid-service
+    ports:
+      - "8081:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=${BID_DB_CONNECTION_STRING}
+      - ConnectionStrings__RabbitMq=${RABBITMQ_CONNECTION_STRING}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+    depends_on:
+      bid-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+
+  resource-service:
+    build:
+      context: . 
+      dockerfile: ResourceService/Dockerfile 
+    container_name: resource-service
+    ports:
+      - "8082:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=${RESOURCE_DB_CONNECTION_STRING}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+    depends_on:
+      resource-db:
+        condition: service_healthy
+
+volumes:
+  auth-db-data:
+  bid-db-data:
+  resource-db-data:

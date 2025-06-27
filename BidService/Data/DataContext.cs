@@ -9,5 +9,8 @@ namespace BidService.Data
             : base(options) { }
 
         public DbSet<Bid> Bids => Set<Bid>();
+
+        public DbSet<RequiredMaterial> RequiredMaterials => Set<RequiredMaterial>();
+        public DbSet<RequiredTechnique> RequiredTechniques => Set<RequiredTechnique>();
     }
 }

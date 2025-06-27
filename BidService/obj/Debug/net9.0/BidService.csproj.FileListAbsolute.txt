@@ -128,10 +128,8 @@ C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\BidS
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\BidService.sourcelink.json
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\scopedcss\bundle\BidService.styles.css
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets.build.json
-C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\BidService.csproj.Up2Date
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\BidService.dll
 C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\refint\BidService.dll
@@ -222,3 +220,12 @@ C:\Users\micha\source\repos\ConstructionProject\BidService\bin\Debug\net9.0\ru\M
 C:\Users\micha\source\repos\ConstructionProject\BidService\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 C:\Users\micha\source\repos\ConstructionProject\BidService\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 C:\Users\micha\source\repos\ConstructionProject\BidService\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
+C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets\msbuild.BidService.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets\msbuild.BidService.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets\msbuild.build.BidService.props
+C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.BidService.props
+C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.BidService.props
+C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets.pack.json
+C:\Users\micha\source\repos\ConstructionProject\BidService\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\micha\source\repos\ConstructionProject\BidService\bin\Debug\net9.0\ConstructionProject.Contracts.dll
+C:\Users\micha\source\repos\ConstructionProject\BidService\bin\Debug\net9.0\ConstructionProject.Contracts.pdb

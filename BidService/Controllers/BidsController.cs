@@ -1,65 +1,56 @@
 ﻿using BidService.DTO;
+using BidService.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BidService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BidsController : Controller
+    [Authorize]
+    public class BidsController : ControllerBase
     {
-        private readonly BidCreateService _bidCommandService;
-        private readonly BidService.Services.BidService _bidService; 
+        private readonly BidService.Services.BidService _bidService;
 
-        public BidsController(BidCreateService bidCommandService, BidService.Services.BidService bidService)
+        public BidsController(BidService.Services.BidService bidService)
         {
-            _bidCommandService = bidCommandService;
             _bidService = bidService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BidDto>>> GetAll()
+        public async Task<ActionResult<List<BidDto>>> GetAllBids()
         {
-            var bids = await _bidService.GetAllAsync();
+            var bids = await _bidService.GetAllBidsAsync();
             return Ok(bids);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BidDto>> GetById(Guid id)
+        public async Task<ActionResult<BidDto>> GetBidById(Guid id)
         {
-            var bid = await _bidService.GetByIdAsync(id);
+            var bid = await _bidService.GetBidByIdAsync(id);
             if (bid == null)
+            {
                 return NotFound();
+            }
             return Ok(bid);
         }
 
         [HttpPost]
         public async Task<ActionResult<BidDto>> CreateBid([FromBody] CreateBidDto dto)
         {
-            var bid = await _bidCommandService.CreateBidAsync(dto);
-            return CreatedAtAction(nameof(CreateBid), new { id = bid.Id }, bid);
+            var bid = await _bidService.CreateBidAsync(dto);
+
+            var bidDto = await _bidService.GetBidByIdAsync(bid.Id);
+
+            return CreatedAtAction(nameof(GetBidById), new { id = bid.Id }, bidDto);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] BidDto dto)
+        [HttpDelete("clear-all")]
+        [Authorize(Roles = "Администратор")]
+        public async Task<IActionResult> ClearAllBids()
         {
-            if (id != dto.Id)
-                return BadRequest();
-
-            var updated = await _bidService.UpdateAsync(dto);
-            if (!updated)
-                return NotFound();
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var deleted = await _bidService.DeleteAsync(id);
-            if (!deleted)
-                return NotFound();
-
-            return NoContent();
+            await _bidService.ClearAllBidsAsync();
+            return Ok(new { message = "Все заявки были успешно удалены." });
         }
     }
 }

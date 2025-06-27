@@ -28,25 +28,85 @@ namespace BidService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("material")
+                    b.Property<string>("Result")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("result")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("technique")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("userName")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Bids");
+                });
+
+            modelBuilder.Entity("BidService.Models.RequiredMaterial", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BidId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BidId");
+
+                    b.ToTable("RequiredMaterials");
+                });
+
+            modelBuilder.Entity("BidService.Models.RequiredTechnique", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BidId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BidId");
+
+                    b.ToTable("RequiredTechniques");
+                });
+
+            modelBuilder.Entity("BidService.Models.RequiredMaterial", b =>
+                {
+                    b.HasOne("BidService.Models.Bid", null)
+                        .WithMany("RequiredMaterials")
+                        .HasForeignKey("BidId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BidService.Models.RequiredTechnique", b =>
+                {
+                    b.HasOne("BidService.Models.Bid", null)
+                        .WithMany("RequiredTechniques")
+                        .HasForeignKey("BidId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BidService.Models.Bid", b =>
+                {
+                    b.Navigation("RequiredMaterials");
+
+                    b.Navigation("RequiredTechniques");
                 });
 #pragma warning restore 612, 618
         }

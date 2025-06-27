@@ -38,6 +38,12 @@ namespace AuthService.Services
 
         public async Task Register(string userName, string email, string password)
         {
+            var existingUser = await _userRepository.GetByEmailAsync(email);
+            if (existingUser is not null)
+            {
+                throw new Exception("Пользователь с таким email уже существует");
+            }
+
             var hashedPassword = _passwordHasher.Generate(password);
 
             var user = new User
@@ -55,11 +61,16 @@ namespace AuthService.Services
         {
             var user = await _userRepository.GetByEmailAsync(email);
 
+            if (user is null)
+            {
+                throw new Exception("Неверный email или пароль");
+            }
+
             var result = _passwordHasher.Verify(password, user.passwordHash);
 
             if (result == false)
             {
-                throw new Exception("Failed to login");
+                throw new Exception("Неверный email или пароль");
             }
 
             var token = _jwtProvider.GenerateToken(user);

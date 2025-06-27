@@ -9,6 +9,7 @@
       "BidService/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
+          "ConstructionProject.Contracts": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
           "Microsoft.AspNetCore.OpenApi": "9.0.4",
           "Microsoft.EntityFrameworkCore": "9.0.5",
@@ -1625,6 +1626,14 @@
             "fileVersion": "0.0.0.0"
           }
         }
+      },
+      "ConstructionProject.Contracts/1.0.0": {
+        "runtime": {
+          "ConstructionProject.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -2571,6 +2580,11 @@
       "sha512": "sha512-8DHkn09D91eN7TF/RCRsF1XuHX2AJXOmg0EQAv19vNs8SJ6IhdEyzjzRvn99L2eNYEHzBwzkn3uvZWLOtr65Rg==",
       "path": "wolverinefx.rabbitmq/4.1.0",
       "hashPath": "wolverinefx.rabbitmq.4.1.0.nupkg.sha512"
+    },
+    "ConstructionProject.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

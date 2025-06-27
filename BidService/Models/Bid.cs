@@ -4,12 +4,11 @@
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public string userName { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
 
-        public string material { get; set; } = string.Empty;
+        public string Result { get; set; } = "В обработке";
 
-        public string technique { get; set; } = string.Empty;
-
-        public string result { get; set; } = string.Empty;
+        public ICollection<RequiredMaterial> RequiredMaterials { get; set; } = new List<RequiredMaterial>();
+        public ICollection<RequiredTechnique> RequiredTechniques { get; set; } = new List<RequiredTechnique>();
     }
 }

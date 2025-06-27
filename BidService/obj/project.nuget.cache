@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YL/LgSLFbYw=",
+  "dgSpecHash": "b3ZuHIRk984=",
   "success": true,
   "projectFilePath": "C:\\Users\\micha\\source\\repos\\ConstructionProject\\BidService\\BidService.csproj",
   "expectedPackageFiles": [
@@ -143,10 +143,8 @@
     {
       "code": "NU1608",
       "level": "Warning",
-      "message": "Версия обнаруженного пакета нарушает ограничение зависимости: Microsoft.CodeAnalysis.Workspaces.MSBuild 4.8.0 требуется Microsoft.CodeAnalysis.Common (= 4.8.0), но в результате разрешения получена версия Microsoft.CodeAnalysis.Common 4.14.0.",
-      "projectPath": "C:\\Users\\micha\\source\\repos\\ConstructionProject\\BidService\\BidService.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\micha\\source\\repos\\ConstructionProject\\BidService\\BidService.csproj",
+      "message": "Версия обнаруженного пакета нарушает ограничение зависимости: Microsoft.CodeAnalysis.Workspaces.MSBuild 4.8.0 требуется Microsoft.CodeAnalysis.Common (= 4.8.0), но в результате разрешения получена версия Microsoft.CodeAnalysis.Common 4.14.0.",
       "libraryId": "Microsoft.CodeAnalysis.Common",
       "targetGraphs": [
         "net9.0"
@@ -155,10 +153,8 @@
     {
       "code": "NU1608",
       "level": "Warning",
-      "message": "Версия обнаруженного пакета нарушает ограничение зависимости: Microsoft.CodeAnalysis.Workspaces.MSBuild 4.8.0 требуется Microsoft.CodeAnalysis.Workspaces.Common (= 4.8.0), но в результате разрешения получена версия Microsoft.CodeAnalysis.Workspaces.Common 4.14.0.",
-      "projectPath": "C:\\Users\\micha\\source\\repos\\ConstructionProject\\BidService\\BidService.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\micha\\source\\repos\\ConstructionProject\\BidService\\BidService.csproj",
+      "message": "Версия обнаруженного пакета нарушает ограничение зависимости: Microsoft.CodeAnalysis.Workspaces.MSBuild 4.8.0 требуется Microsoft.CodeAnalysis.Workspaces.Common (= 4.8.0), но в результате разрешения получена версия Microsoft.CodeAnalysis.Workspaces.Common 4.14.0.",
       "libraryId": "Microsoft.CodeAnalysis.Workspaces.Common",
       "targetGraphs": [
         "net9.0"

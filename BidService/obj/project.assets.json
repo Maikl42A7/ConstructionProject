@@ -2720,6 +2720,16 @@
             "related": ".xml"
           }
         }
+      },
+      "ConstructionProject.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/ConstructionProject.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ConstructionProject.Contracts.dll": {}
+        }
       }
     }
   },
@@ -8266,11 +8276,17 @@
         "wolverinefx.rabbitmq.4.1.0.nupkg.sha512",
         "wolverinefx.rabbitmq.nuspec"
       ]
+    },
+    "ConstructionProject.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../ConstructionProject.Contracts/ConstructionProject.Contracts.csproj",
+      "msbuildProject": "../ConstructionProject.Contracts/ConstructionProject.Contracts.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "BCrypt.Net-Next >= 4.0.3",
+      "ConstructionProject.Contracts >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.5",
       "Microsoft.AspNetCore.OpenApi >= 9.0.4",
       "Microsoft.EntityFrameworkCore >= 9.0.5",
@@ -8318,7 +8334,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\micha\\source\\repos\\ConstructionProject\\ConstructionProject.Contracts\\ConstructionProject.Contracts.csproj": {
+              "projectPath": "C:\\Users\\micha\\source\\repos\\ConstructionProject\\ConstructionProject.Contracts\\ConstructionProject.Contracts.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -8331,7 +8351,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -8417,7 +8437,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300-preview.0.25177.5/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

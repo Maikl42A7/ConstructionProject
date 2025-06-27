@@ -15,10 +15,16 @@ namespace BidService.Services
         }
 
         public async Task<List<Bid>> GetAllAsync() =>
-            await _context.Bids.ToListAsync();
+            await _context.Bids
+                .Include(b => b.RequiredMaterials)
+                .Include(b => b.RequiredTechniques)
+                .ToListAsync();
 
         public async Task<Bid?> GetByIdAsync(Guid id) =>
-            await _context.Bids.FindAsync(id);
+            await _context.Bids
+                .Include(b => b.RequiredMaterials)
+                .Include(b => b.RequiredTechniques)
+                .FirstOrDefaultAsync(b => b.Id == id); 
 
         public async Task AddAsync(Bid bid)
         {
@@ -34,11 +40,16 @@ namespace BidService.Services
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            var bid = await GetByIdAsync(id);
+            var bid = await _context.Bids.FindAsync(id);
             if (bid is null) return false;
 
             _context.Bids.Remove(bid);
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task ClearAllAsync()
+        {
+            await _context.Bids.ExecuteDeleteAsync();
         }
     }
 }
